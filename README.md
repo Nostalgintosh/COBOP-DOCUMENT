@@ -5,6 +5,30 @@ This is design for optimizing prompt writing to make it more clear and professio
 
 Here is an example of COBOP in action.
 This type of **prompt language** is design for building and organizing prompt without any AI drift e.g. *scope creep* or Token Overspending e.g. *Budget Leaks* to show-up within the organization.
+
+1. The TOK(n) Governor at the Variable Level:
+
+   * Instead of vague instructions like "Keep it brief", COBOP uses hard limits: EMAIL-SUBJECT PIC X TOK(15) or BODY-COPY PIC MD TOK(150).
+
+   * This forces the generation engine to truncate output before it inflates context-window costs.
+
+2. Modular Prompting with COPYBOOKS:
+
+   * Re-typing system prompts, brand guidelines, or role definitions across multiple files burns prompt tokens repeatedly.
+
+   * By leveraging COPY "FILE.CPY" REPLACING ==A== BY "B", standard rules stay in lightweight, pre-tested external modules and are only compiled when needed.
+
+3. Chunked Generation via YLD (Yield):
+
+   * Generating 1,000 lines of code at once invites errors midway through, forcing you to discard the run and spend double the tokens regenerating the whole module.
+
+   * Using PERFORM ... YLD(WAIT-FOR-APPROVAL) forces the model to pause at discrete milestones, letting you verify the output before paying tokens for the next phase.
+
+4. Eliminating Filler with STOP RUN:
+
+   * Conversational boilerplate—"Sure! I would be happy to help you build that React Native module..."—wastes input and output tokens across every turn in a thread.
+
+   * STOP RUN strips out conversational fluff completely, ensuring you only pay for usable lines of code or data.
 ```
 #   IDENTIFICATION DIVISION.
 ##  PROGRAM-ID.               **TIMECARD-UI-REDESIGN.**
