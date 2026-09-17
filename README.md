@@ -75,3 +75,4 @@ Here is an example of COBOP in action.
         
         STOP RUN.
 ```
+**NOTE** YOU DO NOT NEED TO USE CHINESE TO WRITE COBOP IN ORDER TO USE THIS MARKDOWN-LIKE LANGUAGE.
