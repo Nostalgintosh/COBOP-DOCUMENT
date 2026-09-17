@@ -4,6 +4,7 @@
 This is design for optimizing prompt writing to make it more clear and professional.
 
 Here is an example of COBOP in action.
+This type of **prompt language** is design for building and organizing prompt without any AI drift e.g. *scope creep* or Token Overspending e.g. *Budget Leaks* to show-up within the organization.
 ```
 #   IDENTIFICATION DIVISION.
 ##  PROGRAM-ID.               **TIMECARD-UI-REDESIGN.**
