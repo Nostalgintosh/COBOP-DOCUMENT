@@ -33,35 +33,35 @@ This type of **prompt language** is design for building and organizing prompt wi
 
 **Here is an example of COBOP in action.**
 ```
-# IDENTIFICATION DIVISION
-## PROGRAM-ID. **TIMECARD-UI-DUO-CORE**
-### AUTHOR-INTENT. "Responsive UI for foldables (iPhone Duo/Galaxy Fold) and standard phones."
-### SYSTEM-ROLE. "SENIOR REACT NATIVE UX ENGINEER"
+#   IDENTIFICATION DIVISION.
+##  PROGRAM-ID.       **TIMECARD-UI-DUO-CORE**
+### AUTHOR-INTENT.     "Responsive UI for foldable (iPhone Duo/Galaxy Fold) and standard phones."
+### SYSTEM-ROLE.       "SENIOR REACT NATIVE UX ENGINEER"
 
-# ENVIRONMENT DIVISION
-## INPUT-CONTEXT "React Native using Flexbox and Dimensions API for dynamic folding screens."
+#   ENVIRONMENT DIVISION.
+##  INPUT-CONTEXT      "React Native using Flexbox and Dimensions API for dynamic folding screens."
 ### TONE-CONFIGURATION. FORMAL, TECHNICAL, NON-CONVERSATIONAL.
-    OUTPUT-LIMITS. ONLY USE: react-native, typescript, tailwindcss.
-    RESTRICTIONS. DO NOT RENDER PURPLE LABELS IN COMPILED SOURCE CODE.
+    OUTPUT-LIMITS.      ONLY USE: react-native, typescript, tailwind, css.
+    RESTRICTIONS.     **DO NOT RENDER PURPLE LABELS IN COMPILED SOURCE CODE.**
 
-# DATA DIVISION
-## WORKING-STORAGE
+#   DATA DIVISION
+##  WORKING-STORAGE
     ** 01 DEVICE-STATE. **
-        05 SCREEN-MODE         PIC X       VALUE "AUTO". /* FOLDED (5.4") or UNFOLDED (7.6") */
+          05 SCREEN-MODE         PIC X       VALUE "AUTO". /* FOLDED (5.4") or UNFOLDED (7.6") */
         
     ** 01 UI-THEME-CONFIG. **
-        05 AESTHETIC           PIC X       TOK(15) VALUE "Corporate Printer-Paper".
-        05 COLOR-SCHEME        PIC X       TOK(10) VALUE "DARK-MODE".
+          05 AESTHETIC           PIC X       TOK(15) VALUE "Corporate Printer-Paper".
+          05 COLOR-SCHEME        PIC X       TOK(10) VALUE "DARK-MODE".
 
     ** 01 NAVIGATION-TOGGLES. **
-        05 TAB-1               PIC X       MSK("PURPLE: nav_punching") VALUE "PUNCHING".
-        05 TAB-2               PIC X       MSK("PURPLE: nav_history")  VALUE "HISTORY".
-        05 TAB-3               PIC X       MSK("PURPLE: nav_settings") VALUE "SETTING".
+          05 TAB-1               PIC X       MSK("PURPLE: nav_punching") VALUE "PUNCHING".
+          05 TAB-2               PIC X       MSK("PURPLE: nav_history")  VALUE "HISTORY".
+          05 TAB-3               PIC X       MSK("PURPLE: nav_settings") VALUE "SETTING".
 
     ** 01 LOCALIZATION-PACK. **
-        05 LANG-SUPPORT        PIC LIST    VALUE [EN, ES, HT, LC, PD].
+          05 LANG-SUPPORT        PIC LIST    VALUE [EN, ES, HT, LC, PD].
 
-# PROCEDURE DIVISION.
+#   PROCEDURE DIVISION.
     PERFORM 100-SETUP-RESPONSIVE-LAYOUT
         REQ(USE-DIMENSIONS-API).
 
