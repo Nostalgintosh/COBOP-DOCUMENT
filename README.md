@@ -5,7 +5,6 @@ This is design for optimizing prompt writing to make it more clear and professio
 
 When prompts are written in natural conversational English, models default to probability and predictive guessing. That is where scope creep starts—the AI assumes you want extra features, conversational introductions, or alternative approaches you never asked for. In mainframe systems, an unallocated variable or an undefined routine halts execution immediately. By forcing that exact discipline onto an LLM, you establish strict bounds on scope and compute.
 
-Here is an example of COBOP in action.
 This type of **prompt language** is design for building and organizing prompt without any AI drift e.g. *scope creep* or Token Overspending e.g. *Budget Leaks* to show-up within the organization.
 
 1. The TOK(n) Governor at the Variable Level:
@@ -32,6 +31,7 @@ This type of **prompt language** is design for building and organizing prompt wi
 
    * STOP RUN strips out conversational fluff completely, ensuring you only pay for usable lines of code or data.
 
+**Here is an example of COBOP in action.**
 ```
 #   IDENTIFICATION DIVISION.
 ##  PROGRAM-ID.               **TIMECARD-UI-REDESIGN.**
