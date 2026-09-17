@@ -34,51 +34,117 @@ This type of **prompt language** is design for building and organizing prompt wi
 **Here is an example of COBOP in action.**
 ```
 #   IDENTIFICATION DIVISION.
-##  PROGRAM-ID.       **TIMECARD-UI-DUO-CORE**
-### AUTHOR-INTENT.     "Responsive UI for foldable (iPhone Duo/Galaxy Fold) and standard phones."
-### SYSTEM-ROLE.       "SENIOR REACT NATIVE UX ENGINEER"
+##  PROGRAM-ID.               **TIMECARD-UI-REDESIGN.**
+### AUTHOR-INTENT.             "Responsive UI for foldables and standard phones".
+### SYSTEM-ROLE.               "SENIOR BACK-END ARCHITECT & ENGINEER".
 
 #   ENVIRONMENT DIVISION.
-##  INPUT-CONTEXT      "React Native using Flexbox and Dimensions API for dynamic folding screens."
-### TONE-CONFIGURATION. FORMAL, TECHNICAL, NON-CONVERSATIONAL.
-    OUTPUT-LIMITS.      ONLY USE: react-native, typescript, tailwind, css.
-    RESTRICTIONS.     **DO NOT RENDER PURPLE LABELS IN COMPILED SOURCE CODE.**
+##  INPUT-CONTEXT             "React Native using Flexbox and Dimensions API for dynamic folding screens".
+### TONE-CONFIGURATION.        FORMAL, TECHNICAL, NON-CONVERSATIONAL.
+    OUTPUT-LIMITS.             ONLY USE: json, firebase-auth, typescript.
+    RESTRICTIONS.            **DO NOT RENDER PURPLE LABELS IN COMPILED SOURCE CODE.**
 
-#   DATA DIVISION
+##  OUTPUT-CONTROL-LIST.
+      PERMIT                   "React Native Functional Components".
+      PERMIT                   "Strict TypeScript typing".
+      DENY                     "Class-based components".
+      DENY                     "Use of 'any' types".
+      DENY                     "Conversational filler like 'Here is your code'".
+
+## INPUT-OUTPUT SECTION.
+   ** FILE-CONTROL. **
+        SELECT ICON-PUNCH-IN  ASSIGN TO "assets/icon_punch_in.png".
+        SELECT ICON-PUNCH-OUT ASSIGN TO "assets/icon_punch_out.png".
+        SELECT ICON-HISTORY   ASSIGN TO "assets/icon_history.png".
+        SELECT ICON-SETTINGS  ASSIGN TO "assets/icon_settings.png".
+
+#   DATA DIVISION.
 ##  WORKING-STORAGE
-    ** 01 DEVICE-STATE. **
-          05 SCREEN-MODE         PIC X       VALUE "AUTO". /* FOLDED (5.4") or UNFOLDED (7.6") */
-        
-    ** 01 UI-THEME-CONFIG. **
-          05 AESTHETIC           PIC X       TOK(15) VALUE "Corporate Printer-Paper".
-          05 COLOR-SCHEME        PIC X       TOK(10) VALUE "DARK-MODE".
+** 01 USER-PROFILE-RECORD. **
+    	05 USER-ID               PIC X(36)      TOK(40) VALUE "UUID-GENERIC" REQ(VALID-UUID).
+    	05 DISPLAY-NAME          PIC X          TOK(30) VALUE "USER-PROFILE".
+    	05 AUTH-PROVIDER         PIC X          TOK(15) VALUE "FIREBASE".
+    	05 HOURLY-RATE           PIC 9(2)V92    VALUE 00.00 REQ(TWO-DECIMAL-PLACES).
 
-    ** 01 NAVIGATION-TOGGLES. **
-          05 TAB-1               PIC X       MSK("PURPLE: nav_punching") VALUE "PUNCHING".
-          05 TAB-2               PIC X       MSK("PURPLE: nav_history")  VALUE "HISTORY".
-          05 TAB-3               PIC X       MSK("PURPLE: nav_settings") VALUE "SETTING".
+** 01 TIME-CARD-RECORD. **
+    	05 EMPLOYEE-ID           PIC X          TOK(10) VALUE "EMPLOYEE".
+    	05 CLOCK-IN-TIMESTAMP    PIC X(19)      TOK(20).
+    	05 CLOCK-OUT-TIMESTAMP   PIC X(19)      TOK(20).
+    	05 CURRENT-HOURS         PIC 9(3)V92    TOK(10) VALUE  00.00.
+    	05 CURRENT-EARNINGS      PIC 9(5)V92    TOK(10) VALUE 000.00.
+    	05 PAY-PERIOD-START      PIC X(10)      TOK(10) VALUE "XX/XX/2XXX".
+    	05 PAY-PERIOD-END        PIC X(10)      TOK(10) VALUE "XX/XX/2XXX".
 
-    ** 01 LOCALIZATION-PACK. **
-          05 LANG-SUPPORT        PIC LIST    VALUE [EN, ES, HT, LC, PD].
+** 01 ACTIVE-SHIFT-RECORD. **
+    	05 SHIFT-STATUS          PIC X          TOK(10) VALUE "OFF-DUTY".
+    	05 CLOCK-IN-TIME         PIC X(19)      TOK(20).
+    	05 ACCUMULATED-HOURS     PIC 9(3)V92    VALUE 00.00.
+    	05 GROSS-EARNINGS        PIC 9(5)V92    VALUE 00.00.
 
-#   PROCEDURE DIVISION.
-    PERFORM 100-SETUP-RESPONSIVE-LAYOUT
+** 01 UI-ACTION-BAR. **
+    	05 BTN-CLOCK-IN          PIC X          MAP(ICON-PUNCH-IN)  MSK("PURPLE: icon_1").
+    	05 BTN-CLOCK-OUT         PIC X          MAP(ICON-PUNCH-OUT) MSK("PURPLE: icon_2").
+    	05 BTN-HISTORY           PIC X          MAP(ICON-HISTORY)   MSK("PURPLE: icon_3").
+    	05 BTN-SETTINGS          PIC X          MAP(ICON-SETTINGS)  MSK("PURPLE: icon_4").
+
+** 10 CONFIGURATION-FLAGS. **
+    	05 APP-LOCK-STATE        PIC X          VALUE "ACTIVE".
+    	05 THEME-MODE            PIC X          VALUE "CLASSIC-PAPER".
+    	05 SCAN-TO-PUNCH-EN      PIC X          VALUE "TRUE".
+    	05 UNPAID-BREAK-EN       PIC X          VALUE "TRUE".
+
+** 10 BREAK-CONFIG. **
+    	05 BREAK-DURATION        PIC 9          VALUE 15. /*OPTIONS: 15, 30, 60 mins*/
+    	05 BREAK-STATUS          PIC X          VALUE "UNPAID".
+
+** 10 SCAN-TO-PUNCH-CONFIG. **
+    	05 OCR-ENGINE            PIC X          VALUE "Google-Vision".
+    	05 TARGET-ACTION         PIC X          VALUE "PUNCH-OUT".
+
+** 10 LOCALIZATION-PACK. **
+    	05 LANG-SUPPORT          PIC LIST       VALUE [EN, ES, HT, LC, PD].
+
+# PROCEDURE DIVISION.
+    	PERFORM 100-INITIALIZE-AUTH-SESSION.
+        ALT(OUTPUT "USE-STANDARD-REACT-STATE").
+    
+    	PERFORM 200-SETUP-RESPONSIVE-LAYOUT
         REQ(USE-DIMENSIONS-API).
-
-    PERFORM 200-RENDER-NAVIGATION-BAR
+        
+    	PERFORM 300-RENDER-NAVIGATION-BAR
         EVALUATE SCREEN-MODE
             WHEN "UNFOLDED"
                 COMPUTE DOCK-POSITION = "LEFT-SIDE"
             WHEN OTHER
-                COMPUTE DOCK-POSITION = "BOTTOM".
-                
-    PERFORM 300-DRAFT-MAIN-CARDS
+                COMPUTE DOCK-POSITION = "BOTTOM"
+        END-EVALUATE.
+
+    	PERFORM 400-SYNC-HOTSCHEDULES-CALENDAR.
+
+    	PERFORM 500-PROCESS-OCR-SCAN-TO-PUNCH
+        WHEN CAMERA-TRIGGER = ACTIVE
         YLD(WAIT-FOR-USER-APPROVAL).
 
-    PERFORM 400-RESOLVE-ASSET-MAPPINGS.
-        INSPECT DRAFT-CODE REPLACING ALL "PURPLE:" BY SPACES.
+    	PERFORM 600-VALIDATE-MISSED-CLOCK-OUT.
 
-    PERFORM 500-GENERATE-TYPESCRIPT-MODULES.
-    STOP RUN.
+    	PERFORM 700-EVALUATE-AND-CALCULATE-PAY
+        EVALUATE SHIFT-STATUS
+            WHEN "ON-DUTY"
+                COMPUTE GROSS-EARNINGS = ACCUMULATED-HOURS * HOURLY-RATE
+            WHEN OTHER
+                CONTINUE
+        END-EVALUATE.
+        
+    	PERFORM 800-RESOLVE-ASSET-MAPPINGS.
+        INSPECT UI-LAYOUT 
+        REPLACING ALL MSK("PURPLE: icon_1") BY <Image source={require(ICON-PUNCH-IN)}  />
+        REPLACING ALL MSK("PURPLE: icon_2") BY <Image source={require(ICON-PUNCH-OUT)} />
+        REPLACING ALL MSK("PURPLE: icon_3") BY <Image source={require(ICON-HISTORY)}   />
+        REPLACING ALL MSK("PURPLE: icon_4") BY <Image source={require(ICON-SETTINGS)}  />.
+        INSPECT DRAFT-CODE 
+        REPLACING ALL "PURPLE-LABEL" BY SPACES.
+
+    	PERFORM 900-GENERATE-TYPESCRIPT-MODULES.
+
+    	STOP RUN.
 ```
-**NOTE** YOU DO NOT NEED TO USE CHINESE TO WRITE COBOP IN ORDER TO USE THIS MARKDOWN-LIKE LANGUAGE.
