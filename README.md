@@ -32,7 +32,7 @@ This type of **prompt language** is design for building and organizing prompt wi
    * STOP RUN strips out conversational fluff completely, ensuring you only pay for usable lines of code or data.
 
 **Here is an example of COBOP in action.**
-```
+```cpl
 #   IDENTIFICATION DIVISION.
 ##  PROGRAM-ID. TIMECARD-UI-REDESIGN.
 ### AUTHOR-INTENT.
