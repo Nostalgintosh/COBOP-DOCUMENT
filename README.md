@@ -34,9 +34,10 @@ This type of **prompt language** is design for building and organizing prompt wi
 **Here is an example of COBOP in action.**
 ```
 #   IDENTIFICATION DIVISION.
-##  PROGRAM-ID.               **TIMECARD-UI-REDESIGN.**
-### AUTHOR-INTENT.             "Responsive UI for foldables and standard phones".
-### SYSTEM-ROLE.               "SENIOR BACK-END ARCHITECT & ENGINEER".
+##  PROGRAM-ID. TIMECARD-UI-REDESIGN.
+### AUTHOR-INTENT.
+           "Generate an implementation plan and React Native modules
+            for a responsive employee timecard application."
 
 #   ENVIRONMENT DIVISION.
 ##  INPUT-CONTEXT             "React Native using Flexbox and Dimensions API for dynamic folding screens".
