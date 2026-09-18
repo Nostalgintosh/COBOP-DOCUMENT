@@ -1,0 +1,193 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "COPOL",
+  "scopeName": "source.copol",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#headings"
+    },
+    {
+      "include": "#bold"
+    },
+    {
+      "include": "#record-levels"
+    },
+    {
+      "include": "#mask"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#picture"
+    },
+    {
+      "include": "#budget"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#numbers"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.block.copol",
+          "begin": "/\\*",
+          "end": "\\*/"
+        },
+        {
+          "name": "comment.line.copol",
+          "match": "\\*>.*$"
+        }
+      ]
+    },
+    "headings": {
+      "patterns": [
+        {
+          "match": "(?i)^(\\s*#{1,6}[ \\t]*)([A-Z][A-Z0-9-]*(?:[ \\t]+(?:DIVISION|SECTION))?\\.?)",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.heading.copol"
+            },
+            "2": {
+              "name": "entity.name.section.copol"
+            }
+          }
+        },
+        {
+          "name": "entity.name.section.copol",
+          "match": "(?i)^[ \\t]*(?:(?:IDENTIFICATION|ENVIRONMENT|DATA|PROCEDURE)[ \\t]+DIVISION|(?:INPUT-OUTPUT|WORKING-STORAGE)[ \\t]+SECTION|(?:PROGRAM-ID|AUTHOR-INTENT|SYSTEM-ROLE|INPUT-CONTEXT|TONE-CONFIGURATION|OUTPUT-CONTROL-LIST|WORKING-STORAGE))(?![\\w-])\\.?"
+        }
+      ]
+    },
+    "bold": {
+      "name": "markup.bold.copol",
+      "begin": "\\*\\*",
+      "end": "\\*\\*|$"
+    },
+    "record-levels": {
+      "patterns": [
+        {
+          "name": "markup.bold.record.copol",
+          "match": "^[ \\t]*(?:01|10)[ \\t]+[A-Za-z][\\w-]*\\.?"
+        },
+        {
+          "name": "storage.type.level.copol",
+          "match": "^[ \\t]*[0-9]{2}(?=[ \\t]+[A-Za-z][\\w-]*)"
+        }
+      ]
+    },
+    "mask": {
+      "begin": "(?i)(?<![\\w-])(MSK)([ \\t]*\\()",
+      "beginCaptures": {
+        "1": {
+          "name": "support.function.annotation.copol"
+        },
+        "2": {
+          "name": "punctuation.section.arguments.copol"
+        }
+      },
+      "end": "\\)|$",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "name": "string.quoted.placeholder.copol",
+          "begin": "\"",
+          "end": "\"|$",
+          "patterns": [
+            {
+              "match": "\\\\.|\"\""
+            }
+          ],
+          "applyEndPatternLast": true
+        },
+        {
+          "name": "string.quoted.placeholder.copol",
+          "begin": "'",
+          "end": "'|$",
+          "patterns": [
+            {
+              "match": "\\\\.|''"
+            }
+          ],
+          "applyEndPatternLast": true
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.date.copol",
+          "match": "(?i)\"[X0-9]{2}/[X0-9]{2}/[X0-9]{4}\"|'[X0-9]{2}/[X0-9]{2}/[X0-9]{4}'"
+        },
+        {
+          "name": "string.quoted.double.copol",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "match": "\\\\.|\"\""
+            }
+          ],
+          "applyEndPatternLast": true
+        },
+        {
+          "name": "string.quoted.single.copol",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "match": "\\\\.|''"
+            }
+          ],
+          "applyEndPatternLast": true
+        }
+      ]
+    },
+    "picture": {
+      "patterns": [
+        {
+          "name": "storage.type.picture.copol",
+          "match": "(?i)(?<![\\w-])PIC(?:TURE)?[ \\t]+(?:LIST|MD|JSON|(?:(?:S|V|X|A|[0-9]|Z|B|P|/|,|\\+|-|\\$|\\*)(?:\\([0-9]+\\))?)+)(?![\\w-])"
+        }
+      ]
+    },
+    "budget": {
+      "name": "support.function.budget.copol",
+      "match": "(?i)(?<![\\w-])TOK[ \\t]*\\([ \\t]*[0-9]+[ \\t]*\\)"
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.permission.copol",
+          "match": "(?i)(?<![\\w-])(?:PERMIT|DENY)(?![\\w-])"
+        },
+        {
+          "name": "keyword.other.value.copol",
+          "match": "(?i)(?<![\\w-])VALUE(?:S)?(?![\\w-])"
+        },
+        {
+          "name": "support.function.annotation.copol",
+          "match": "(?i)(?<![\\w-])(?:REQ|MAP|MSK|ALT|YLD)(?=[ \\t]*\\()"
+        },
+        {
+          "name": "keyword.control.procedure.copol",
+          "match": "(?i)(?<![\\w-])(?:END-EVALUATE|EVALUATE|PERFORM|WHEN|STOP[ \\t]+RUN)(?![\\w-])"
+        }
+      ]
+    },
+    "numbers": {
+      "name": "constant.numeric.copol",
+      "match": "(?<![\\w-])[+-]?[0-9]+(?:\\.[0-9]+)?(?![\\w-])"
+    }
+  }
+}

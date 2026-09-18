@@ -1,0 +1,131 @@
+{
+  "textMateRules": [
+    {
+      "name": "COPOL: Plain text",
+      "scope": [
+        "source.copol"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "COPOL: Ordinary strings",
+      "scope": [
+        "source.copol string.quoted.double.copol",
+        "source.copol string.quoted.single.copol"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "COPOL: Headings",
+      "scope": [
+        "source.copol entity.name.section.copol",
+        "source.copol punctuation.definition.heading.copol"
+      ],
+      "settings": {
+        "foreground": "#2E3192",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "COPOL: Records and bold text",
+      "scope": [
+        "source.copol markup.bold.copol",
+        "source.copol markup.bold.record.copol"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "COPOL: Record levels",
+      "scope": [
+        "source.copol storage.type.level.copol"
+      ],
+      "settings": {
+        "foreground": "#282828",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "COPOL: Permissions",
+      "scope": [
+        "source.copol keyword.control.permission.copol"
+      ],
+      "settings": {
+        "foreground": "#662D91",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "COPOL: Declarations and annotations",
+      "scope": [
+        "source.copol storage.type.picture.copol",
+        "source.copol support.function.budget.copol",
+        "source.copol support.function.annotation.copol"
+      ],
+      "settings": {
+        "foreground": "#FCB040",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "COPOL: Value keyword",
+      "scope": [
+        "source.copol keyword.other.value.copol"
+      ],
+      "settings": {
+        "foreground": "#0F75BC",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "COPOL: Values and dates",
+      "scope": [
+        "source.copol constant.numeric.copol",
+        "source.copol string.quoted.date.copol"
+      ],
+      "settings": {
+        "foreground": "#0B9444",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "COPOL: Masked placeholders",
+      "scope": [
+        "source.copol string.quoted.placeholder.copol"
+      ],
+      "settings": {
+        "foreground": "#BF1E2D",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "COPOL: Procedure keywords",
+      "scope": [
+        "source.copol keyword.control.procedure.copol"
+      ],
+      "settings": {
+        "foreground": "#ED217C",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "COPOL: Comments",
+      "scope": [
+        "source.copol comment.block.copol",
+        "source.copol comment.line.copol"
+      ],
+      "settings": {
+        "foreground": "#86CDA5",
+        "fontStyle": "italic"
+      }
+    }
+  ]
+}
