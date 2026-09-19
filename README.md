@@ -151,4 +151,16 @@ This type of **prompt language** is design for building and organizing prompt wi
 ```
 
 # INSTRUCTION OF COPOL, DIVISION BY DIVISION.
+We are learn COPOL in the best way possible, *DIVISION BY DIVISION* to understand the start of the prompting language to the end.
+We will start by the `IDENTIFICATION DIVISION` and end to `PROCEDURE DIVISION`
 
+### the IDENTIFICATION DIVISION.
+``` cpl
+#   IDENTIFICATION DIVISION.
+##  PROGRAM-ID.      PAYROL.
+### AUTOR-INTENT.
+                "Organized this years payrol from 2025
+                and create a clear excel sheet to calculate the most to least cost
+                per week and month, and see what when up
+                and what went down for this year."
+```
