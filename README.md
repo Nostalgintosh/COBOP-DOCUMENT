@@ -1,5 +1,5 @@
 # COBOP-DOCUMENT
-### COmmon Business Oriented Prompting
+### COmmon Prompting Oriented Language
 
 This is design for optimizing prompt writing to make it more clear and professional.
 
@@ -31,7 +31,7 @@ This type of **prompt language** is design for building and organizing prompt wi
 
    * STOP RUN strips out conversational fluff completely, ensuring you only pay for usable lines of code or data.
 
-**Here is an example of COBOP in action.**
+**Here is an example of COPOL in action.**
 ```cpl
 #   IDENTIFICATION DIVISION.
 ##  PROGRAM-ID. TIMECARD-UI-REDESIGN.
