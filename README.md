@@ -149,3 +149,6 @@ This type of **prompt language** is design for building and organizing prompt wi
 
     	STOP RUN.
 ```
+
+# INSTRUCTION OF COPOL, DIVISION BY DIVISION.
+
