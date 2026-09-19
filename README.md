@@ -9,7 +9,7 @@ This type of **prompt language** is design for building and organizing prompt wi
 
 1. The TOK(n) Governor at the Variable Level:
 
-   * Instead of vague instructions like "Keep it brief", COBOP uses hard limits: `EMAIL-SUBJECT PIC X TOK(15)` or `BODY-COPY PIC MD TOK(150)`.
+   * Instead of vague instructions like "Keep it brief", COPOL uses hard limits: `EMAIL-SUBJECT PIC X TOK(15)` or `BODY-COPY PIC MD TOK(150)`.
 
    * This forces the generation engine to truncate output before it inflates context-window costs.
 
