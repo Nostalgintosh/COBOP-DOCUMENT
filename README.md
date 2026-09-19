@@ -1,4 +1,4 @@
-# COBOP-DOCUMENT
+# COPOL-DOCUMENT
 ### COmmon Prompting Oriented Language
 
 This is design for optimizing prompt writing to make it more clear and professional.
